@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RentACarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CarBrand">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CarModel" Relationship="Self.FK_CarModel_CarBrand" FromRole="CarBrand" ToRole="CarModel" />
+  </EntityType>
+  <EntityType Name="CarColor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Color" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CarInfo" Relationship="Self.FK_CarInfo_CarColor1" FromRole="CarColor" ToRole="CarInfo" />
+  </EntityType>
+  <EntityType Name="CarInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="TexPassport" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DailyPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="CarModelId" Type="Int32" />
+    <Property Name="ColorId" Type="Int32" />
+    <NavigationProperty Name="CarColor" Relationship="Self.FK_CarInfo_CarColor1" FromRole="CarInfo" ToRole="CarColor" />
+    <NavigationProperty Name="CarModel" Relationship="Self.FK_CarInfo_CarModel" FromRole="CarInfo" ToRole="CarModel" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_CarInfo" FromRole="CarInfo" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="CarModel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ModelName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CarBrandId" Type="Int32" />
+    <NavigationProperty Name="CarBrand" Relationship="Self.FK_CarModel_CarBrand" FromRole="CarModel" ToRole="CarBrand" />
+    <NavigationProperty Name="CarInfo" Relationship="Self.FK_CarInfo_CarModel" FromRole="CarModel" ToRole="CarInfo" />
+  </EntityType>
+  <EntityType Name="ClientInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ClientSurname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ClientAge" Type="Int32" />
+    <Property Name="ClientPassportNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="ClientPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ClientEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ClientAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_ClientInfo" FromRole="ClientInfo" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" />
+    <Property Name="CarInfoId" Type="Int32" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+    <Property Name="Startdate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="OverDate" Type="DateTime" Precision="3" />
+    <Property Name="Days" Type="Int32" />
+    <Property Name="LateTime" Type="Int32" />
+    <Property Name="SumPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="LatePrice" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="CarInfo" Relationship="Self.FK_Orders_CarInfo" FromRole="Orders" ToRole="CarInfo" />
+    <NavigationProperty Name="ClientInfo" Relationship="Self.FK_Orders_ClientInfo" FromRole="Orders" ToRole="ClientInfo" />
+  </EntityType>
+  <EntityType Name="Worker">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="IsAdmin" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_CarModel_CarBrand">
+    <End Role="CarBrand" Type="Self.CarBrand" Multiplicity="0..1" />
+    <End Role="CarModel" Type="Self.CarModel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarBrand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CarModel">
+        <PropertyRef Name="CarBrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarInfo_CarColor1">
+    <End Role="CarColor" Type="Self.CarColor" Multiplicity="0..1" />
+    <End Role="CarInfo" Type="Self.CarInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarColor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CarInfo">
+        <PropertyRef Name="ColorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarInfo_CarModel">
+    <End Role="CarModel" Type="Self.CarModel" Multiplicity="0..1" />
+    <End Role="CarInfo" Type="Self.CarInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarModel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CarInfo">
+        <PropertyRef Name="CarModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_CarInfo">
+    <End Role="CarInfo" Type="Self.CarInfo" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="CarInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_ClientInfo">
+    <End Role="ClientInfo" Type="Self.ClientInfo" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClientInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RentACarEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CarBrand" EntityType="Self.CarBrand" />
+    <EntitySet Name="CarColor" EntityType="Self.CarColor" />
+    <EntitySet Name="CarInfo" EntityType="Self.CarInfo" />
+    <EntitySet Name="CarModel" EntityType="Self.CarModel" />
+    <EntitySet Name="ClientInfo" EntityType="Self.ClientInfo" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" />
+    <EntitySet Name="Worker" EntityType="Self.Worker" />
+    <AssociationSet Name="FK_CarModel_CarBrand" Association="Self.FK_CarModel_CarBrand">
+      <End Role="CarBrand" EntitySet="CarBrand" />
+      <End Role="CarModel" EntitySet="CarModel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarInfo_CarColor1" Association="Self.FK_CarInfo_CarColor1">
+      <End Role="CarColor" EntitySet="CarColor" />
+      <End Role="CarInfo" EntitySet="CarInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarInfo_CarModel" Association="Self.FK_CarInfo_CarModel">
+      <End Role="CarModel" EntitySet="CarModel" />
+      <End Role="CarInfo" EntitySet="CarInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_CarInfo" Association="Self.FK_Orders_CarInfo">
+      <End Role="CarInfo" EntitySet="CarInfo" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_ClientInfo" Association="Self.FK_Orders_ClientInfo">
+      <End Role="ClientInfo" EntitySet="ClientInfo" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

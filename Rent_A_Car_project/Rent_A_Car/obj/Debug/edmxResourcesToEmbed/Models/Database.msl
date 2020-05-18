@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RentACarModelStoreContainer" CdmEntityContainer="RentACarEntities2">
+    <EntitySetMapping Name="CarBrand">
+      <EntityTypeMapping TypeName="RentACarModel.CarBrand">
+        <MappingFragment StoreEntitySet="CarBrand">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarColor">
+      <EntityTypeMapping TypeName="RentACarModel.CarColor">
+        <MappingFragment StoreEntitySet="CarColor">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarInfo">
+      <EntityTypeMapping TypeName="RentACarModel.CarInfo">
+        <MappingFragment StoreEntitySet="CarInfo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CarNumber" ColumnName="CarNumber" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="TexPassport" ColumnName="TexPassport" />
+          <ScalarProperty Name="DailyPrice" ColumnName="DailyPrice" />
+          <ScalarProperty Name="CarModelId" ColumnName="CarModelId" />
+          <ScalarProperty Name="ColorId" ColumnName="ColorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarModel">
+      <EntityTypeMapping TypeName="RentACarModel.CarModel">
+        <MappingFragment StoreEntitySet="CarModel">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+          <ScalarProperty Name="CarBrandId" ColumnName="CarBrandId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClientInfo">
+      <EntityTypeMapping TypeName="RentACarModel.ClientInfo">
+        <MappingFragment StoreEntitySet="ClientInfo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="ClientSurname" ColumnName="ClientSurname" />
+          <ScalarProperty Name="ClientAge" ColumnName="ClientAge" />
+          <ScalarProperty Name="ClientPassportNumber" ColumnName="ClientPassportNumber" />
+          <ScalarProperty Name="ClientPhone" ColumnName="ClientPhone" />
+          <ScalarProperty Name="ClientEmail" ColumnName="ClientEmail" />
+          <ScalarProperty Name="ClientAddress" ColumnName="ClientAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="RentACarModel.Orders">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="CarInfoId" ColumnName="CarInfoId" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="Startdate" ColumnName="Startdate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="OverDate" ColumnName="OverDate" />
+          <ScalarProperty Name="Days" ColumnName="Days" />
+          <ScalarProperty Name="LateTime" ColumnName="LateTime" />
+          <ScalarProperty Name="SumPrice" ColumnName="SumPrice" />
+          <ScalarProperty Name="LatePrice" ColumnName="LatePrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Worker">
+      <EntityTypeMapping TypeName="RentACarModel.Worker">
+        <MappingFragment StoreEntitySet="Worker">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
